@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root, section, main{
+    @apply h-full bg-cover bg-[url('https://t3.ftcdn.net/jpg/05/27/22/74/360_F_527227460_fmVwGqPZi48uVbTDLOBCwaJb4oN0QQGr.jpg')];
+}
