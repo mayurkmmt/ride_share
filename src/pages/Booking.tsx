@@ -5,6 +5,7 @@ import VehicleSelection from "../components/booking/VehicleSelection";
 import { MOCK_DRIVERS, VehicleType } from "../helper/constants/booking";
 import DriverInfo from "../components/booking/DriverInfo";
 import { DriverDetailsT } from "../types/driver";
+import { useBookingFormData } from "../context/BookingFormDataCtx";
 
 type BookingPropsT = {
   rideStatus: string;
@@ -12,10 +13,7 @@ type BookingPropsT = {
 };
 
 const Booking: React.FC<BookingPropsT> = ({ rideStatus, setRideStatus }) => {
-  const [formData, setFormData] = React.useState({
-    pickup_location: "",
-    dropoff_location: "",
-  });
+  const { formData } = useBookingFormData();
 
   const [selectedVehicleType, setSelectedVehicleType] = React.useState(
     VehicleType.Auto
@@ -24,7 +22,7 @@ const Booking: React.FC<BookingPropsT> = ({ rideStatus, setRideStatus }) => {
   const [selectedDriver, setSelectedDriver] =
     React.useState<DriverDetailsT | null>(null);
 
-  const handleVehicleSelection = () => {
+  const renderVehicleSelection = () => {
     if (formData.pickup_location && formData.dropoff_location) {
       setRideStatus("vehicle");
     }
@@ -64,13 +62,7 @@ const Booking: React.FC<BookingPropsT> = ({ rideStatus, setRideStatus }) => {
                   Pickup Location
                 </>
               }
-              onLocSelect={(loc) => {
-                console.log(loc);
-                setFormData({
-                  ...formData,
-                  pickup_location: `${loc.selectedCity}, ${loc.selectedLocation}`,
-                });
-              }}
+              id="pickup_location"
             />
           </div>
           <div className="mb-4">
@@ -82,13 +74,7 @@ const Booking: React.FC<BookingPropsT> = ({ rideStatus, setRideStatus }) => {
                   Dropoff Location
                 </>
               }
-              onLocSelect={(loc) => {
-                console.log(loc);
-                setFormData({
-                  ...formData,
-                  dropoff_location: `${loc.selectedCity}, ${loc.selectedLocation}`,
-                });
-              }}
+              id="dropoff_location"
             />
           </div>
         </>
@@ -96,7 +82,7 @@ const Booking: React.FC<BookingPropsT> = ({ rideStatus, setRideStatus }) => {
       {rideStatus === "initial" && (
         <button
           disabled={!formData.pickup_location || !formData.dropoff_location}
-          onClick={handleVehicleSelection}
+          onClick={renderVehicleSelection}
           className="w-full disabled:bg-gray-400 bg-theme/70 text-white py-3 rounded-md hover:bg-theme/90 transition"
         >
           Find a Ride
@@ -128,7 +114,6 @@ const Booking: React.FC<BookingPropsT> = ({ rideStatus, setRideStatus }) => {
       {rideStatus === "confirmed" && (
         <DriverInfo
           selectedDriver={selectedDriver}
-          formData={formData}
           rideFare={rideFare}
           selectedVehicleType={selectedVehicleType}
           setRideStatus={setRideStatus}

@@ -4,6 +4,7 @@ import UserMenu from "../components/UserMenu";
 
 import MapImg from "../assets/img/map.png";
 import Booking from "./Booking";
+import { BookingFormDataCtxProvider } from "../context/BookingFormDataCtx";
 
 const DashBoard = () => {
   const [rideStatus, setRideStatus] = useState("initial"); // initial, vehicle, searching, confirmed
@@ -29,7 +30,9 @@ const DashBoard = () => {
         </div>
       )}
 
-      <Booking rideStatus={rideStatus} setRideStatus={setRideStatus} />
+      <BookingFormDataCtxProvider>
+        <Booking rideStatus={rideStatus} setRideStatus={setRideStatus} />
+      </BookingFormDataCtxProvider>
 
       {/* Footer */}
       {/* <Footer /> */}

@@ -3,23 +3,19 @@ import { closeSnackbar, enqueueSnackbar, SnackbarKey } from "notistack";
 import React, { memo } from "react";
 import { VehicleType } from "../../helper/constants/booking";
 import { DriverDetailsT } from "../../types/driver";
+import { useBookingFormData } from "../../context/BookingFormDataCtx";
 
 type DriverInfoPropsT = {
   selectedDriver: DriverDetailsT | null;
-  formData: any;
   rideFare: number;
   selectedVehicleType: number;
   setRideStatus: (status: string) => void;
 };
 
 const DriverInfo: React.FC<DriverInfoPropsT> = memo(
-  ({
-    selectedDriver,
-    formData,
-    rideFare,
-    selectedVehicleType,
-    setRideStatus,
-  }) => {
+  ({ selectedDriver, rideFare, selectedVehicleType, setRideStatus }) => {
+    const { formData, setFormData } = useBookingFormData();
+
     // add action to an individual snackbar
     const action = (snackbarId: SnackbarKey) => (
       <>
@@ -35,6 +31,10 @@ const DriverInfo: React.FC<DriverInfoPropsT> = memo(
           className="bg-black/80 p-2 rounded-2xl text-xs text-red-500 font-medium"
           onClick={() => {
             setRideStatus("initial");
+            setFormData({
+              pickup_location: "",
+              dropoff_location: "",
+            });
             closeSnackbar(snackbarId);
           }}
         >

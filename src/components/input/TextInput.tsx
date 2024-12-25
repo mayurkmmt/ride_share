@@ -23,7 +23,7 @@ const TextInput: React.FC<TextInputPropsT> = ({
         <label className="flex items-center text-lg mb-2">{label}</label>
       )}
       <input
-        className="w-full px-3 py-2 border rounded-md text-black focus:outline-none focus:ring-2 focus:ring-theme"
+        className="input-field"
         type="text"
         name={name}
         placeholder={placeholder}

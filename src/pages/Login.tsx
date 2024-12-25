@@ -144,7 +144,6 @@ const Login = () => {
   };
 
   const handleLoginSubmit = () => {
-    console.log({ formData });
     if (formData.phone_num.length === 10 && loginStep === INITIAL_STEP) {
       if (onlyDigitRegex.test(formData.phone_num)) {
         enqueueSnackbar("Otp sent successfully!!", { variant: "success" });
