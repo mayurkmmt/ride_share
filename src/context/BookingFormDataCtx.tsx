@@ -1,15 +1,17 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 // Define the shape of the form data
-interface LocationFormData {
+interface BookingFormData {
   pickup_location: string;
   dropoff_location: string;
+  paymentSuccess: null | string;
+  paymentError: null | string;
 }
 
 // Define the context type
 type BookingFormDataCtxT = {
-  formData: LocationFormData;
-  setFormData: React.Dispatch<React.SetStateAction<LocationFormData>>;
+  formData: BookingFormData;
+  setFormData: React.Dispatch<React.SetStateAction<BookingFormData>>;
 };
 
 // Create the context with an undefined initial state
@@ -25,9 +27,11 @@ type BookingFormDataCtxProviderPropsT = {
 export const BookingFormDataCtxProvider: React.FC<
   BookingFormDataCtxProviderPropsT
 > = ({ children }) => {
-  const [formData, setFormData] = useState<LocationFormData>({
+  const [formData, setFormData] = useState<BookingFormData>({
     pickup_location: "",
     dropoff_location: "",
+    paymentSuccess: null,
+    paymentError: null,
   });
 
   return (

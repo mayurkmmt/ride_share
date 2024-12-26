@@ -13,7 +13,7 @@ export const getCurrentTime = (additional_hrs = 0) => {
   hours = hours ? hours : 12; // Adjust "0" to "12" for midnight and noo
 
   // Determine AM or PM
-  let isPM = hours >= 12 ? "am" : "pm";
+  // let isPM = hours >= 12 ? "am" : "pm";
 
   // Format minutes to always display two digits (e.g., "09" instead of "9")
   const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;

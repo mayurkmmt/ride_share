@@ -2,7 +2,7 @@ import React from "react";
 import travelGif from "../assets/img/travel-to.gif";
 import { useNavigate } from "react-router";
 
-const SplashScreen = () => {
+const SplashScreen: React.FC = () => {
   const navigate = useNavigate();
 
   return (
